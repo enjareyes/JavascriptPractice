@@ -12,23 +12,23 @@
 // "(50)("                    false
 
 
-var isBalanced = function(input){
-  var pairs = [],
-      parens = { '{':'}', '[':']', '(':')' }
+var isBalanced = function(str){
+  var sets = [],
+      parens = {'{':'}', '[':']', '(':')'};
 
-  for (var i = 0; i < input.length; i++){
-    var x = input[i];
+  for (var i = 0; i < str.length; i++){
+    var curr = str[i]
 
-    if (parens[x]) pairs.push(x);
-    else if (x === '}' || x === ']' || x === ')'){
-      if (parens[pairs.pop()] !== x){
+    if (parens[curr]) sets.push(curr);
+    else if (curr === ')' || curr === '}' || curr === ']'){
+      var last = sets.pop();
+      if (parens[last] !== curr){
         return false;
       }
     }
   }
-
-  return pairs.length === 0;
-};
+  return sets.length === 0
+}
 
 
 
